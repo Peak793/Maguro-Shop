@@ -1,4 +1,12 @@
 from django.contrib import admin
-from .models import Product
+from .models import Product,Category,Reccom
+
+class ProductAdmin(admin.ModelAdmin):
+    list_display = ['code','name','price','available','category','show_image']
+    list_filter = ['available']
+    search_fields = ['code','name']
+
 # Register your models here.
-admin.site.register(Product)
+admin.site.register(Product,ProductAdmin)
+admin.site.register(Category)
+admin.site.register(Reccom)

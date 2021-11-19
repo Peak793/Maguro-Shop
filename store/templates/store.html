@@ -1,0 +1,71 @@
+{% extends 'layouts/base.html' %}
+{% load static %}
+{% block title %}สินค้าทั้งหมด{% endblock %}
+{% block content %}
+<div class="container">
+    <div class="text-center m-3">
+        <h1>สินค้าทั้งหมด</h1>
+    </div>
+    <hr style="height:5px;border:none;color:#333;background-color:#333;" />
+    <div class='row'>
+
+        <div class='col-lg-2'></div>
+
+        <div class='col-lg-10'>
+
+            <!-- Drop down -->
+            <div class="dropdown mb-1">
+                <button class="btn btn-dark dropdown-toggle" type="button"
+                    id="dropdownMenuButton2" data-bs-toggle="dropdown"
+                    aria-expanded="false">
+                    เรียงตาม : ใหม่-เก่า
+                </button>
+                <ul class="dropdown-menu dropdown-menu-dark"
+                    aria-labelledby="dropdownMenuButton2">
+                    <li><a class="dropdown-item active" href="#">ใหม่-เก่า</a></li>
+                    <li><a class="dropdown-item" href="#">Another action</a></li>
+                    <li><a class="dropdown-item" href="#">Something else here</a></li>
+                    <li><hr class="dropdown-divider"></li>
+                    <li><a class="dropdown-item" href="#">Separated link</a></li>
+                </ul>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="row">
+        <div class="col-lg-2">
+    
+            <!-- แถบหมวดหมู่ข้างๆ -->
+            <div class="list-group">
+              <a href="{% url 'myapp:store' %}" class="list-group-item list-group-item-action {% if not category_id %}active{% endif %}" aria-current="true">
+                ทั้งหมด
+              </a>
+              {% for c in categories %}
+              <a href="{% url 'myapp:store' %}?categoryid={{c.id}}" class="list-group-item list-group-item-action {% if category_id|add:'0' == c.id %}active{% endif %}">{{c.name}}</a>
+              {% endfor %}
+            </div>
+        </div>
+      
+        <div class="col-lg-10 mt-2">
+            <div class="row">
+                {% for p in products %}
+            <div class='col-lg-3 mt-1 mb-3'>
+              <img class='thumbnail' src="{{p.image.url}}">
+              <div class='box-element product'>
+                <h6><strong>{{p.name}}</strong></h6>
+                <hr>
+                <button class='btn btn-outline-secondary add-btn'>Add to Cart</button>
+                <a class="btn btn-outline-success" href='#'>View All</a>
+                <h4 style="display: inline-block'; float:right"><strong>฿{{p.price}}</strong></h4>
+              </div>
+            </div>
+            {% endfor %}
+            </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+{% endblock %}
