@@ -51,18 +51,38 @@
             <div class="row">
                 {% for p in products %}
             <div class='col-lg-3 mt-1 mb-3'>
-              <img class='thumbnail' src="{{p.image.url}}">
+              <a href="{% url 'myapp:detail' slug=p.slug %}"><img class='thumbnail' src="{{p.image.url}}"></a>
               <div class='box-element product'>
-                <h6><strong>{{p.name}}</strong></h6>
+                <a href="{% url 'myapp:detail' slug=p.slug %}" style="text-decoration: none;"><h6><strong>{{p.name}}</strong></h6></a>
                 <hr>
                 <button class='btn btn-outline-secondary add-btn'>Add to Cart</button>
-                <a class="btn btn-outline-success" href='#'>View All</a>
+                <a class="btn btn-outline-success" href="{% url 'myapp:detail' slug=p.slug %}">View Detail</a>
                 <h4 style="display: inline-block'; float:right"><strong>฿{{p.price}}</strong></h4>
               </div>
             </div>
             {% endfor %}
             </div>
-            </div>
+
+            <!-- แบ่งหน้า -->
+            <ul class="pagination justify-content-center">
+                {% if products.has_previous %}
+                <li class="page-item disabled">
+                  <a class="page-link" href="?page=products.previous_page_number">Previous</a>
+                </li>
+                {% endif %}
+
+                {% for i in products.paginator.page_range %}
+                <li class="page-item {% if products.number == i %}active{% endif %}"><a class="page-link" href="{{ i }}">{{ i }}</a></li>
+                {% endfor %}
+
+                {% if products.has_next %}
+                <li class="page-item">
+                  <a class="page-link" href="?page=products.next_page_number">Next</a>
+                </li>
+                {% endif %}
+              </ul>
+
+        </div>
         </div>
     </div>
 

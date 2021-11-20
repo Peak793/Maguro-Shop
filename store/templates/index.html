@@ -76,12 +76,12 @@
     <!-- สินค้าแนะนำทั้งหมด -->
     {% for r in reccom %}
     <div class='col-lg-3 mt-2 mb-2'>
-      <img class='thumbnail' src="{{r.product.image.url}}">
+      <a href="{% url 'myapp:detail' slug=r.product.slug %}"><img class='thumbnail' src="{{r.product.image.url}}"></a>
       <div class='box-element product'>
-        <h6><strong>{{r.product.name}}</strong></h6>
+        <a href="{% url 'myapp:detail' slug=r.product.slug %}" style="text-decoration: none;"><h6><strong>{{r.product.name}}</strong></h6></a>
         <hr>
         <button class='btn btn-outline-secondary add-btn'>Add to Cart</button>
-        <a class="btn btn-outline-success" href='#'>View All</a>
+        <a class="btn btn-outline-success" href="{% url 'myapp:detail' slug=r.product.slug %}">View Detail</a>
         <h4 style="display: inline-block'; float:right"><strong>฿{{r.product.price}}</strong></h4>
       </div>
     </div>

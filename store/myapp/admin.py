@@ -2,9 +2,10 @@ from django.contrib import admin
 from .models import Product,Category,Reccom
 
 class ProductAdmin(admin.ModelAdmin):
-    list_display = ['code','name','price','available','category','show_image']
+    list_display = ['code','name','slug','price','available','category','show_image']
     list_filter = ['available']
     search_fields = ['code','name']
+    prepopulated_fields = {'slug':['name']}
 
 # Register your models here.
 admin.site.register(Product,ProductAdmin)

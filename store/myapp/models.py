@@ -13,6 +13,7 @@ class Category(models.Model):
 class Product(models.Model):
     code = models.CharField(max_length=10,unique=True)
     name = models.CharField(max_length=100,null=True,blank=True)
+    slug = models.SlugField(max_length=200, unique=True,null=True)
     price = models.FloatField(default=0)
     description = models.TextField(null=True, blank=True)
     available = models.BooleanField(default=False)
