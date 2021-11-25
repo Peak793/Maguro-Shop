@@ -1,6 +1,7 @@
 from django.http.response import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render, get_object_or_404
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
+from django.urls.base import reverse
 from .models import Category, Product, Reccom
 # Create your views here.
 
@@ -45,8 +46,8 @@ def detail(request, slug):
 
 
 def cart_add(request, slug):
-    product = get_object_or_404(Book, slug=slug)
-    cart_items = request.session('cart_items') or []
+    product = get_object_or_404(Product, slug=slug)
+    cart_items = request.session.get('cart_items') or []
 
     duplicated = False
 
@@ -63,11 +64,11 @@ def cart_add(request, slug):
             'qty': 1,
         })
 
-    return HttpResponseRedirect('myapp:cart_list', kwargs={})
+    return HttpResponseRedirect(reverse('myapp:cart_list', kwargs={}))
 
 
 def cart_list(request):
-    cart_items = request.session('cart_items') or []
+    cart_items = request.session.get('cart_items') or []
 
     total_qty = 0
 
