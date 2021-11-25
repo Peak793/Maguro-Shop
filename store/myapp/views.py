@@ -2,6 +2,7 @@ from django.http.response import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render, get_object_or_404
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from .models import Category, Product, Reccom
+from django.urls.base import reverse
 # Create your views here.
 
 
@@ -45,8 +46,8 @@ def detail(request, slug):
 
 
 def cart_add(request, slug):
-    product = get_object_or_404(Book, slug=slug)
-    cart_items = request.session('cart_items') or []
+    product = get_object_or_404(Product, slug=slug)
+    cart_items = request.session.get('cart_items') or []
 
     duplicated = False
 
@@ -57,17 +58,19 @@ def cart_add(request, slug):
 
     if not duplicated:
         cart_items.append({
+            'image': product.image.url,
             'id' : product.id,
             'slug' : product.slug,
             'name' : product.name,
+            'price' : product.price,
             'qty': 1,
         })
-
-    return HttpResponseRedirect('myapp:cart_list', kwargs={})
+    request.session['cart_items'] = cart_items 
+    return HttpResponseRedirect(reverse('myapp:cart_list', kwargs={}))
 
 
 def cart_list(request):
-    cart_items = request.session('cart_items') or []
+    cart_items = request.session.get('cart_items') or []
 
     total_qty = 0
 
@@ -78,3 +81,12 @@ def cart_list(request):
     return render(request, 'store/cart.html', {
         'cart_items' : cart_items,
     })
+
+def cart_delete(request,slug):
+    cart_items = request.session.get("cart_items") or []
+    for i in range(len(cart_items)):
+        if cart_items[i]['slug'] == slug:
+            del cart_items[i]
+            break
+    request.session['cart_items'] = cart_items
+    return HttpResponseRedirect(reverse('myapp:cart_list',kwargs={}))
