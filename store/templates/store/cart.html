@@ -2,7 +2,31 @@
 {% load static %}
 {% block title %}หน้าตระกร้าสินค้ามหาศาลของmonokai: {% endblock %}
 {% block content %}
-    <div class="col-lg-6 offset-lg-3">
-        <h1>Cart List</h1>
+<div class="col-lg-8 offset-lg-2">
+    <h1 class="text-center">Cart List</h1>
+    <table class="table" style="vertical-align: middle;">
+        <thead>
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">Img</th>
+                <th scope="col">Product's name</th>
+                <th scope="col">Qty</th>
+                <th scope="col">Price</th>
+                <th scope="col">Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for c in cart_items %}
+            <tr>
+                <th scope="row">{{ forloop.counter }}</th>
+                <td class="w-25"><img src="{{c.image }}" alt="product'spic" class="img-fluid img-thumbnail"></td>
+                <td>{{ c.name }}</td>
+                <td>{{ c.qty }}</td>
+                <td>{{ c.price }}</td>
+                <td><a href="{% url 'myapp:cart_delete' slug=c.slug %}">remove</a></td>
+            </tr>
+            {% endfor %}
+        </table>
+
     </div>
-{% endblock %}
+    {% endblock %}
