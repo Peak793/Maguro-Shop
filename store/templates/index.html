@@ -80,7 +80,7 @@
       <div class='box-element product'>
         <a href="{% url 'myapp:detail' slug=r.product.slug %}" style="text-decoration: none;"><h6><strong>{{r.product.name}}</strong></h6></a>
         <hr>
-        <button class='btn btn-outline-secondary add-btn'>Add to Cart</button>
+        <a href="{% url 'myapp:cart_add' slug=r.product.slug %}" class='btn btn-outline-secondary add-btn'>Add to Cart</a>
         <a class="btn btn-outline-success" href="{% url 'myapp:detail' slug=r.product.slug %}">View Detail</a>
         <h4 style="display: inline-block'; float:right"><strong>฿{{r.product.price}}</strong></h4>
       </div>

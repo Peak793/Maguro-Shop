@@ -31,8 +31,7 @@
               </li>
             </ul>
             <form class="d-flex">
-              <a href="#"><img src="{% static 'cart.png' %}" alt='cart.png' class="mx-1" id='cart-icon'></a>
-              <p id="cart-total">0</p>
+              <a href="{% url 'myapp:cart_list' %}"><img src="{% static 'cart.png' %}" alt='cart.png' class="mx-1" id='cart-icon'></a>
               <div class="dropdown">
                 <button class="btn btn-warning dropdown-toggle mx-3" type="button" id="dropdownMenuButton2" data-bs-toggle="dropdown" aria-expanded="false" style="width:70px">
                   <img src="{% static 'usericon.png' %}" style="width: 30px; height:30px; margin:auto;">
