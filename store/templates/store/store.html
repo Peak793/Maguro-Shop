@@ -38,11 +38,11 @@
     
             <!-- แถบหมวดหมู่ข้างๆ -->
             <div class="list-group">
-              <a href="{% url 'myapp:store' %}" class="list-group-item list-group-item-action {% if not category_id %}active{% endif %}" aria-current="true">
+              <a href="{% url 'myapp:category' categoryid=0 %}" class="list-group-item list-group-item-action {% if not category_id %}active{% endif %}" aria-current="true">
                 ทั้งหมด
               </a>
               {% for c in categories %}
-              <a href="{% url 'myapp:store' %}?categoryid={{c.id}}" class="list-group-item list-group-item-action {% if category_id|add:'0' == c.id %}active{% endif %}">{{c.name}}</a>
+              <a href="{% url 'myapp:category' categoryid=c.id %}" class="list-group-item list-group-item-action {% if category_id|add:'0' == c.id %}active{% endif %}">{{c.name}}</a>
               {% endfor %}
             </div>
         </div>

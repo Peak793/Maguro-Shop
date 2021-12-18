@@ -15,7 +15,9 @@ def index(request):
 
 def store(request):
     products = Product.objects.filter(available=True)
-    c = request.GET.get('categoryid')
+
+    #c = request.GET.get('categoryid')
+    c = request.session.get('category') or 0 
 
     if c:
         products = products.filter(category_id=int(c))
@@ -37,7 +39,6 @@ def store(request):
         'category_id': c,
     })
 
-
 def detail(request, slug):
     product = get_object_or_404(Product, slug=slug)
     return render(request, 'store/detail.html', {
@@ -48,7 +49,7 @@ def detail(request, slug):
 def cart_add(request, slug):
     product = get_object_or_404(Product, slug=slug)
     cart_items = request.session.get('cart_items') or []
-    total_price = int(request.session.get('total_price')) or 0
+    total_price = request.session.get('total_price') or 0
     duplicated = False
 
     for c in cart_items:
@@ -117,3 +118,10 @@ def dec_qty(request,slug):
                 cart_items[i]['total'] = int(cart_items[i]['price']) * int(cart_items[i]['qty'])
     request.session['cart_items'] = cart_items
     return HttpResponseRedirect(reverse('myapp:cart_list',kwargs={}))
+
+def category(request, categoryid):
+    if int(categoryid) == 0:
+        request.session['category'] = None
+    else:
+        request.session['category'] = categoryid
+    return HttpResponseRedirect(reverse('myapp:store',kwargs={}))
