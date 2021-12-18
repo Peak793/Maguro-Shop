@@ -5,8 +5,9 @@ from .models import Category, Product, Reccom
 from django.urls.base import reverse
 # Create your views here.
 
-
 def index(request):
+    request.session['sort_id'] = None
+    request.session['sort_name'] = 'จัดเรียงตาม'
     reccom = Reccom.objects.all()
     for x in reccom:
         print(x.product.price)
@@ -15,13 +16,22 @@ def index(request):
 
 def store(request):
     products = Product.objects.filter(available=True)
-
-    #c = request.GET.get('categoryid')
+    s_name = request.session.get('sort_name') or 'จัดเรียงตาม'
+    s_id = request.session.get('sort_id') or 0
     c = request.session.get('category') or 0 
+
+    if int(s_id) == 1:
+        products = products.order_by('-created')
+    elif int(s_id) == 2:
+        products = products.order_by('created')
+    elif int(s_id) == 3:
+        products = products.order_by('price')
+    elif int(s_id) == 4:
+        products = products.order_by('-price')
 
     if c:
         products = products.filter(category_id=int(c))
-
+        
     categories = Category.objects.all()
 
     paginator = Paginator(products, 12)
@@ -37,9 +47,13 @@ def store(request):
         'products': products,
         'categories': categories,
         'category_id': c,
+        'sortid' : s_id,
+        'sortname' : s_name,
     })
 
 def detail(request, slug):
+    request.session['sort_id'] = None
+    request.session['sort_name'] = 'จัดเรียงตาม'
     product = get_object_or_404(Product, slug=slug)
     return render(request, 'store/detail.html', {
         'product': product,
@@ -124,4 +138,20 @@ def category(request, categoryid):
         request.session['category'] = None
     else:
         request.session['category'] = categoryid
+    return HttpResponseRedirect(reverse('myapp:store',kwargs={}))
+
+def sort(request, sortid):
+    if int(sortid) == 0:
+        request.session['sort_id'] = None
+        request.session['sort_name'] = 'จัดเรียงตาม'
+    else:
+        request.session['sort_id'] = sortid
+        if int(sortid) == 1:
+            request.session['sort_name'] = 'วันที่:ใหม่-เก่า'
+        elif int(sortid) == 2:
+            request.session['sort_name'] = 'วันที่:เก่า-ใหม่'
+        elif int(sortid) == 3:
+            request.session['sort_name'] = 'ราคา:น้อย - มาก'
+        elif int(sortid) == 4:
+            request.session['sort_name'] = 'ราคา:มาก - น้อย'
     return HttpResponseRedirect(reverse('myapp:store',kwargs={}))
