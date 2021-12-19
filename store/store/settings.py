@@ -30,6 +30,7 @@ ALLOWED_HOSTS = []
 
 
 # Application definition
+CRISPY_TEMPLATE_PACK = 'bootstrap4'
 
 INSTALLED_APPS = [
     'django.contrib.admin',
@@ -39,6 +40,8 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'myapp',
+    'crispy_forms',
+    'django.contrib.humanize',
 ]
 
 MIDDLEWARE = [
@@ -123,6 +126,9 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')]
+
+MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')

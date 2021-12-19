@@ -1,0 +1,25 @@
+{% extends 'layouts/base.html' %}
+{% load static %}
+{% block title %}Login{% endblock %}
+{% load humanize %}
+{% block content %}
+{% load crispy_forms_tags %}
+
+       <div class="box-elementview product">
+        <div style="position: absolute;left: 50%;top: 50%;-webkit-transform: translate(-50%, -50%);transform: translate(-50%, -50%);">   
+            <div style="text-align: center;"><h1>Log in</h1></div>
+            <div style="text-align: center;">
+                <form action="" method="post" novalidate>
+                    {% csrf_token %}
+                    {{ form|crispy }}
+                    <div style="text-align: center; margin-top: 10px;"><button type="submit" class="btn btn-primary">Log in</button></div>
+                </form>
+            </div>
+        </div>
+    </div>
+  
+{% endblock %}
+
+  
+
+    

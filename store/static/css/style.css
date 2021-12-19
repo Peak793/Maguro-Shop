@@ -1,9 +1,19 @@
+@import 'https://fonts.googleapis.com/css?family=Kanit|Prompt';
+*{	
+	margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+	font-family: 'Prompt', sans-serif;
+}
 body{
 	background-color: hsl(0, 0%, 98%);
+	font-family: 'Prompt', sans-serif;
 }
 
 h1,h2,h3,h4,h5,h6{
 	color:hsl(0, 0%, 30%);
+	font-family: 'Prompt', sans-serif;
+	
 }
 
 .box-element{
@@ -54,19 +64,23 @@ h1,h2,h3,h4,h5,h6{
 
 .thumbnail{
 	width: 100%;
-	height: 200px;
+	height: 300px;
 	-webkit-box-shadow: -1px -3px 5px -2px rgba(214,214,214,1);
     -moz-box-shadow: -1px -3px 5px -2px rgba(214,214,214,1);
     box-shadow: -1px -3px 5px -2px rgba(214,214,214,1);
 }
 
 .product{
-	border-radius: 0 0 4px 4px;
+	border-radius: 0 0 25px 25px;
 }
 
 .bg-dark{
 	background-color: #000000 !important;
 }
+.bg-purple{
+	background-color: rgba(141, 146, 255, 0.42) !important;
+}
+
 
 #cart-icon{
 	width:25px;
@@ -152,7 +166,7 @@ h1,h2,h3,h4,h5,h6{
 	width: 70x;
 	height: 63px;
     position: absolute;
-	top:10%;
+	top:-4%;
 	left:48%;
 }
 .tview{
@@ -200,7 +214,7 @@ h1,h2,h3,h4,h5,h6{
 }
 
 .head_text{
-	font-family: sans-serif;
+	font-family: 'Prompt', sans-serif;
     font-size: 40px;
     font-weight: bold;
 	margin:auto; 
@@ -214,12 +228,44 @@ h1,h2,h3,h4,h5,h6{
 	margin:auto; 
 	font-weight: bold;
 }
-.nav-link{
-	color: rgb(0, 0, 0);
-}
+
 .nav-link-action{
 	background-color: rgb(247, 0, 0);
 }
 .navbar-brand{
 	color: rgb(0, 0, 0);
+}
+.center-screen {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	text-align: center;
+	min-height: 100vh;
+  }
+.bk{
+	background-color: #FFFEE6;
+	padding:160px 40px
+  }
+  .navbar-dark .navbar-nav .nav-link {
+	color: rgb(0, 0, 0);
+}
+.box-elementview{
+	box-shadow:hsl(0, 0%, 100%) 0 0 16px;
+	background: rgba(141, 146, 255, 0.42);
+	border-radius: 35px;
+	width: 500px;
+	height: 500px;
+	padding: 10px;
+	position: absolute;
+	top:100px;
+	left:535px;
+}
+
+.loginbk{
+	background-color: #000000;
+	background-image: url('https://i.pinimg.com/originals/c5/2b/8a/c52b8af68ed3854f1d32164f6dc36dfe.gif');
+	background-position: center;
+	background-size: cover;
+	background-repeat: no-repeat;
+	padding: 500px;
 }

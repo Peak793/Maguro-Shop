@@ -1,4 +1,3 @@
-from datetime import date, timedelta
 class LinkedList:
     class Node :
         def __init__(self,data,next = None) :
@@ -73,28 +72,23 @@ class LinkedList:
             prev = current
             current = next
         self.head = prev
+
     def convertToArr(self):
-        #len1 = findlength(head)
         arr = []
-        index = 0
         curr = self.head
         while (curr != None):
             arr.append( curr.data)
             curr = curr.next
-        #printArr(arr, len1)
         return arr
+
     def sortList(self,asc=True):  
-        #Node current will point to head  
         current = self.head;  
         index = None;  
-        
         if(self.head == None):  
             return;  
         else:  
             while(current != None):  
-                #Node index will point to node next to current  
                 index = current.next;  
-                
                 while(index != None):  
                     if asc:
                         #change year
@@ -157,88 +151,75 @@ class Queue:
     def __str__(self):
         return "".join(str(self.items))
 
-def merge_sort(lst):
-    #global count
-    if len(lst)<=1:
-        return lst
-    mid = len(lst)//2 #แบ่งครั้ง
-    left=lst[:mid]
-    right=lst[mid:]
-    left=merge_sort(left)
-    right = merge_sort(right)
-    #count+=1
-    return list(sort_list(left,right))
 
-def sort_list(left,right):
-    #global count
-    lst =[]
-    while len(left)!=0 and len(right)!=0:
-        if left[0].get('price')<right[0].get('price'):
-            lst.append(left[0])
-            left.pop(0)
-        else:
-            lst.append(right[0])
-            right.pop(0)
-        #count+=1
-    if len(left)==0:
-        lst = lst + right
-        #count+=1
-    else:
-        lst = lst +left
-        #count+=1
-    return lst
 
-def sort_by_price(q):
+def sort_by_price(q,ascending):
     #lst_of_data#get dict
     lst_of_data=[]
     for list_index in range(q.size()):#list
         dicts=q.deQueue() 
         for dictt in dicts:#dict
-            #print(dictt.get('price'))
             lst_of_data.append(dictt)
-            for y in dictt:#key
-                pass
-    lst_sorted = merge_sort(lst_of_data)
-    #print('lst sorted',lst_sorted)
-    new_q = Queue()
-    for x in lst_sorted:
-        new_q.enQueue(x)
+    lst_sorted = mergeSort(lst_of_data,ascending)
     return lst_sorted
-
-#Sort price
-def radixSort(lst):
-    q=Queue(lst)
-    max_digit=getMaxDigit(lst)
-    q10=[Queue(),Queue(),Queue(),Queue(),Queue(),Queue(),Queue(),Queue(),Queue(),Queue()]
-    for i in range(1,max_digit+1):
-        while not q.isEmpty():
-            num=q.dequeue()
-            indexDigit=getDigit(num,i)
-            q10[indexDigit].enqueue(num)
-        print('\nQQ:',end=' ')
-        for i in range(10):
-            print(q10[i],end=' ')
-        for j in range(10):
-            
-            while not q10[j].isEmpty():
-                q.enqueue(q10[j].dequeue())
-    return q.list
-def getDigit(n,d):
-    for i in range(d-1):
-        n//=10
-    return n%10
-def getMaxDigit(lst):
-    n=max(lst)
-    i=0
-    while n>0:
-        n//=10
-        i+=1
-    return i
+def mergeSort(L, ascending = True):
+    result = []  
+    if len(L) == 1:
+        return L  
+    mid = len(L) // 2
+    left = mergeSort(L[:mid])
+    right = mergeSort(L[mid:])
+    x, y = 0, 0
+    while x < len(left) and y < len(right):
+        if left[x].get('price') > right[y].get('price'): # < for descending
+            result.append(right[y])
+            y = y + 1
+        else:
+            result.append(left[x])
+            x = x + 1
+    result = result + left[x:]
+    result = result + right[y:]
+    if ascending == True :
+        return result
+    else:
+        result.reverse()
+        return result
 
 def build_Linkedlist(q_Products):
     l1=LinkedList()
     for i in q_Products:
-        #print(i.get('created'))
+        #linkedlist จะนำข้อมูลจาก Queue ไปดึง วัน เดือน ปี 
         #print(i.get('created').year,i.get('created').month,i.get('created').day)
         l1.append(i)
     return l1
+
+
+#     #Sort price
+# def radixSort(lst):
+#     q=Queue(lst)
+#     max_digit=getMaxDigit(lst)
+#     q10=[Queue(),Queue(),Queue(),Queue(),Queue(),Queue(),Queue(),Queue(),Queue(),Queue()]
+#     for i in range(1,max_digit+1):
+#         while not q.isEmpty():
+#             num=q.dequeue()
+#             indexDigit=getDigit(num,i)
+#             q10[indexDigit].enqueue(num)
+#         print('\nQQ:',end=' ')
+#         for i in range(10):
+#             print(q10[i],end=' ')
+#         for j in range(10):
+            
+#             while not q10[j].isEmpty():
+#                 q.enqueue(q10[j].dequeue())
+#     return q.list
+# def getDigit(n,d):
+#     for i in range(d-1):
+#         n//=10
+#     return n%10
+# def getMaxDigit(lst):
+#     n=max(lst)
+#     i=0
+#     while n>0:
+#         n//=10
+#         i+=1
+#     return i

@@ -1,0 +1,18 @@
+{% extends 'layouts/base.html' %}
+{% load static %}
+{% block title %}Login{% endblock %}
+{% block content %}
+{% load humanize %}
+{% load crispy_forms_tags %}
+
+<div style="position: absolute;left: 50%;top: 50%;-webkit-transform: translate(-50%, -50%);transform: translate(-50%, -50%);">   
+    <div style="text-align: center;"><h1>Sign up</h1></div>
+    <div style="text-align: center;">
+        <form action="" method="post" novalidate>
+            {% csrf_token %}
+            {{ form|crispy }}
+            <div style="text-align: center; margin-top: 10px;"><button type="submit" class="btn btn-primary">Sign up</button></div>
+        </form>
+    </div>
+</div>
+{% endblock %}
