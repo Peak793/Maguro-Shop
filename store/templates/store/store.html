@@ -9,25 +9,29 @@
     <hr style="height:5px;border:none;color:#333;background-color:#333;" />
     <div class='row'>
 
-        <div class='col-lg-2'></div>
-
+        <div class='col-lg-2'>
+          <!-- Drop down -->
+          <div class="dropdown mb-1">
+            <button class="btn btn-dark dropdown-toggle" type="button"
+                id="dropdownMenuButton2" data-bs-toggle="dropdown"
+                aria-expanded="false">
+                {{sortname}}
+            </button>
+            <ul class="dropdown-menu dropdown-menu-dark"
+                aria-labelledby="dropdownMenuButton2">
+                <li><a class="dropdown-item" href="{% url 'myapp:sort' sortid=1%}">วันที่:ใหม่-เก่า</a></li>
+                <li><a class="dropdown-item" href="{% url 'myapp:sort' sortid=2%}">วันที่:เก่า-ใหม่</a></li>
+                <li><a class="dropdown-item" href="{% url 'myapp:sort' sortid=3%}">ราคา:น้อย - มาก</a></li>
+                <li><a class="dropdown-item" href="{% url 'myapp:sort' sortid=4%}#">ราคา:มาก - น้อย</a></li>
+            </ul>
+        </div>
+        </div>
         <div class='col-lg-10'>
-
-            <!-- Drop down -->
-            <div class="dropdown mb-1">
-                <button class="btn btn-dark dropdown-toggle" type="button"
-                    id="dropdownMenuButton2" data-bs-toggle="dropdown"
-                    aria-expanded="false">
-                    {{sortname}}
-                </button>
-                <ul class="dropdown-menu dropdown-menu-dark"
-                    aria-labelledby="dropdownMenuButton2">
-                    <li><a class="dropdown-item" href="{% url 'myapp:sort' sortid=1%}">วันที่:ใหม่-เก่า</a></li>
-                    <li><a class="dropdown-item" href="{% url 'myapp:sort' sortid=2%}">วันที่:เก่า-ใหม่</a></li>
-                    <li><a class="dropdown-item" href="{% url 'myapp:sort' sortid=3%}">ราคา:น้อย - มาก</a></li>
-                    <li><a class="dropdown-item" href="{% url 'myapp:sort' sortid=4%}#">ราคา:มาก - น้อย</a></li>
-                </ul>
-            </div>
+            <form class="d-flex" method="POST" action="{% url 'myapp:search' %}">
+              {% csrf_token %}
+              <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" name="searched">
+              <button class="btn btn-outline-success" type="submit">Search</button>
+            </form>
         </div>
 
     </div>

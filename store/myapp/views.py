@@ -8,9 +8,8 @@ from django.urls.base import reverse
 def index(request):
     request.session['sort_id'] = None
     request.session['sort_name'] = 'จัดเรียงตาม'
+    request.session['searched'] = ''
     reccom = Reccom.objects.all()
-    for x in reccom:
-        print(x.product.price)
     return render(request, 'index.html', {'reccom': reccom, })
 
 
@@ -19,6 +18,10 @@ def store(request):
     s_name = request.session.get('sort_name') or 'จัดเรียงตาม'
     s_id = request.session.get('sort_id') or 0
     c = request.session.get('category') or 0 
+    
+    searched = request.session.get('searched') or ''
+    if searched != '':
+        products = products.filter(name__contains=searched)
 
     if int(s_id) == 1:
         products = products.order_by('-created')
@@ -54,6 +57,7 @@ def store(request):
 def detail(request, slug):
     request.session['sort_id'] = None
     request.session['sort_name'] = 'จัดเรียงตาม'
+    request.session['searched'] = ''
     product = get_object_or_404(Product, slug=slug)
     return render(request, 'store/detail.html', {
         'product': product,
@@ -154,4 +158,9 @@ def sort(request, sortid):
             request.session['sort_name'] = 'ราคา:น้อย - มาก'
         elif int(sortid) == 4:
             request.session['sort_name'] = 'ราคา:มาก - น้อย'
+    return HttpResponseRedirect(reverse('myapp:store',kwargs={}))
+
+def search_item(request):
+    if request.method == 'POST':
+        request.session['searched'] = request.POST['searched']
     return HttpResponseRedirect(reverse('myapp:store',kwargs={}))
