@@ -10,6 +10,13 @@ class Category(models.Model):
     def __str__(self):
         return self.name
 
+class Showcase(models.Model):
+    name = models.CharField(max_length=100)
+    image = models.FileField(upload_to='upload',null=True, blank=True)
+
+    def __str__(self):
+        return self.name
+
 class Product(models.Model):
     code = models.CharField(max_length=10,unique=True)
     name = models.CharField(max_length=100,null=True,blank=True)
@@ -20,6 +27,7 @@ class Product(models.Model):
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)
     image = models.FileField(upload_to='upload',null=True, blank=True)
+    showcase = models.ManyToManyField(Showcase)
     category = models.ForeignKey(Category, null=True,blank=True,on_delete= models.CASCADE)
 
     def __str__(self):

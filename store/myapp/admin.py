@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Product,Category,Reccom
+from .models import Product,Category,Reccom,Showcase
 
 class ProductAdmin(admin.ModelAdmin):
     list_display = ['code','name','slug','price','available','category','show_image']
@@ -11,3 +11,4 @@ class ProductAdmin(admin.ModelAdmin):
 admin.site.register(Product,ProductAdmin)
 admin.site.register(Category)
 admin.site.register(Reccom)
+admin.site.register(Showcase)

@@ -1,8 +1,9 @@
 from django.http.response import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render, get_object_or_404
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
-from .models import Category, Product, Reccom
+from .models import Category, Product, Reccom, Showcase
 from django.urls.base import reverse
+from .dataStruture import Queue,sort_by_price,build_Linkedlist
 # Create your views here.
 
 def index(request):
@@ -18,7 +19,7 @@ def store(request):
     s_name = request.session.get('sort_name') or 'จัดเรียงตาม'
     s_id = request.session.get('sort_id') or 0
     c = request.session.get('category') or 0 
-    
+
     searched = request.session.get('searched') or ''
     if searched != '':
         products = products.filter(name__contains=searched)
@@ -59,6 +60,7 @@ def detail(request, slug):
     request.session['sort_name'] = 'จัดเรียงตาม'
     request.session['searched'] = ''
     product = get_object_or_404(Product, slug=slug)
+    print(product.showcase)
     return render(request, 'store/detail.html', {
         'product': product,
     })
@@ -93,7 +95,7 @@ def cart_add(request, slug):
 
 def cart_list(request):
     cart_items = request.session.get('cart_items') or []
-    total_price = int(request.session.get('total_price')) or 0
+    total_price = request.session.get('total_price') or 0
     total_qty = 0
     total_item = 0
 

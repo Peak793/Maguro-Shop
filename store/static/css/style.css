@@ -13,6 +13,45 @@ h1,h2,h3,h4,h5,h6{
 	padding: 10px;
 }
 
+.box-elementlogo{
+	box-shadow:hsl(0, 0%, 100%) 0 0 16px;
+	background-color: rgb(248, 245, 245);
+	border-radius: 1000px;
+	padding: 15px;
+	
+}
+
+.box-elementview{
+	box-shadow:hsl(0, 0%, 0%) 0 0 16px;
+	background-color: rgb(255, 255, 255);
+	border-radius: 4px;
+	max-width: 1000px;
+	padding: 10px;
+	position: absolute;
+	top:100px;
+	left:100px;
+}
+
+.box-elementshop{
+	box-shadow:hsl(0, 0%, 100%) 0 0 16px;
+	background-color: rgb(255, 255, 255);
+	border-radius: 4px;
+	padding: 10px;
+	position: absolute;
+	top:490px;
+	left:1100px;
+}
+
+.box-elementsize{
+	box-shadow:hsl(0, 0%, 100%) 0 0 16px;
+	background-color: rgb(255, 255, 255);
+	border-radius: 4px;
+	padding: 10px;
+	position: absolute;
+	top:435px;
+	left:1050px;
+}
+
 .thumbnail{
 	width: 100%;
 	height: 200px;
@@ -110,13 +149,45 @@ h1,h2,h3,h4,h5,h6{
 }
 .Logo{
 	max-width: 1000px;
-	width: 55x;
-	height: 55px;
-	margin:0 auto;
-	display: flex;
-	justify-content: flex-end;
-	align-items: flex-end;
-	margin-left: 430px;
+	width: 70x;
+	height: 63px;
+    position: absolute;
+	top:10%;
+	left:48%;
+}
+.tview{
+	max-width: 800px;
+	width: 365px;
+	height: 500px;
+
+}
+.t1{
+	max-width: 400px;
+	width: 220px;
+	height: 250px;
+
+}
+.t2{
+	position: absolute;
+	top:167px;
+	left:1020px;
+}
+
+.t3{
+	position: absolute;
+	top:250px;
+	left:960px;
+}
+.t4{
+	position: absolute;
+	top:335px;
+	left:970px;
+}
+
+.empty{
+	max-width: 7px;
+	width: 7px;
+	height: 7px;
 
 }
 
@@ -143,4 +214,12 @@ h1,h2,h3,h4,h5,h6{
 	margin:auto; 
 	font-weight: bold;
 }
-
+.nav-link{
+	color: rgb(0, 0, 0);
+}
+.nav-link-action{
+	background-color: rgb(247, 0, 0);
+}
+.navbar-brand{
+	color: rgb(0, 0, 0);
+}
