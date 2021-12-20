@@ -2,14 +2,14 @@
 {% load static %}
 {% block title %}หน้าตระกร้าสินค้ามหาศาลของmonokai: {% endblock %}
 {% block content %}
-<div class="row">
+<div class="row" style="margin-top: 3rem;">
 	    <div class="col-lg-8 offset-lg-2">
-		    <div class="box-element">
-                <div class="box-element">
+		    <div class="box-element" style="border-radius: 15px;">
+                <div class="box-element" style="border-radius: 15px;">
                     <a  class="btn btn-outline-dark" href="{% url 'myapp:store' %}">&#x2190; Continue Shopping</a>
                     <br>
                     <br>
-                    <table class="table">
+                    <table class="table" style="border-radius: 15px;">
                         <tr>
                             <th><h5>Items: <strong>{{ total_item }}</strong></h5></th>
                             <th><h5>Total:<strong>{{ total_price }}</strong></h5></th>

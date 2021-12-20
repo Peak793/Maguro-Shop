@@ -7,8 +7,11 @@ class ProductAdmin(admin.ModelAdmin):
     search_fields = ['code','name']
     prepopulated_fields = {'slug':['name']}
 
+class ShowcaseAdmin(admin.ModelAdmin):
+    list_display = ['name','show_image']
+
 # Register your models here.
 admin.site.register(Product,ProductAdmin)
 admin.site.register(Category)
 admin.site.register(Reccom)
-admin.site.register(Showcase)
+admin.site.register(Showcase,ShowcaseAdmin)

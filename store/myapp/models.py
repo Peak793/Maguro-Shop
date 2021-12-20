@@ -17,6 +17,11 @@ class Showcase(models.Model):
     def __str__(self):
         return self.name
 
+    def show_image(self):
+        if self.image:
+            return format_html('<img src="%s" height="50px">' % self.image.url)
+        return ''
+
 class Product(models.Model):
     code = models.CharField(max_length=10,unique=True)
     name = models.CharField(max_length=100,null=True,blank=True)

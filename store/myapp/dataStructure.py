@@ -81,7 +81,7 @@ class LinkedList:
             curr = curr.next
         return arr
 
-    def sortList(self,asc=True):  
+    def sortList(self,asc=True): # sort วันที่ จากเก่าไปใหม่ หรือ ใหม่ไปเก่า
         current = self.head;  
         index = None;  
         if(self.head == None):  
@@ -129,7 +129,7 @@ class LinkedList:
                     index = index.next;  
                 current = current.next;  
 
-
+# Queue #
 class Queue:
     def __init__(self,list=None):
         if list==None:
@@ -151,8 +151,6 @@ class Queue:
     def __str__(self):
         return "".join(str(self.items))
 
-
-
 def sort_by_price(q,ascending):
     #lst_of_data#get dict
     lst_of_data=[]
@@ -162,7 +160,7 @@ def sort_by_price(q,ascending):
             lst_of_data.append(dictt)
     lst_sorted = mergeSort(lst_of_data,ascending)
     return lst_sorted
-def mergeSort(L, ascending = True):
+def mergeSort(L, ascending = True): #sort ราคา จาก น้อยไปมาก หรือ มากไปน้อย
     result = []  
     if len(L) == 1:
         return L  
@@ -185,6 +183,9 @@ def mergeSort(L, ascending = True):
         result.reverse()
         return result
 
+
+
+# linkedlist # 
 def build_Linkedlist(q_Products):
     l1=LinkedList()
     for i in q_Products:

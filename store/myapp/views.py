@@ -24,8 +24,8 @@ def store(request):
     s_id = request.session.get('sort_id') or 0
     c = request.session.get('category') or 0 
     '''use Structure'''
-    q1_Products = Queue()
-    q2_Products = Queue()
+    qDate_Products = Queue()
+    qPrice_Products = Queue()
     list_of_data = []
     for x in products: #"code":x.code พวก atribute ในclass ทั้งหมด
         dict_of_data = {"code":x.code,"name":x.name,
@@ -38,13 +38,12 @@ def store(request):
         "category":x.category,
         }
         list_of_data.append(dict_of_data)
-        q1_Products.enQueue(list_of_data)
-        q2_Products.enQueue(list_of_data)
+        qDate_Products.enQueue(list_of_data)
+        qPrice_Products.enQueue(list_of_data)
         list_of_data=[]
-    q1_Products=sort_by_price(q1_Products,True)
-    l1=build_Linkedlist(q1_Products)
-    #print(q1_Products)
-    #print(type(q1_Products))
+    qDate_Products=sort_by_price(qDate_Products,True)
+    l1=build_Linkedlist(qDate_Products)
+
 
     searched = request.session.get('searched') or ''
     if searched != '':
@@ -55,27 +54,27 @@ def store(request):
             products = temp2
         temp2.clear()
         for i in products:
-            if str(searched) in str(i.name).lower():
+            if str(searched).lower() in str(i.name).lower():
                 temp2.append(i)
         products = temp2
-        # products = products.filter(name__contains=searched)
-
+        
+    #วันที่ ใหม่-เก่า
     if int(s_id) == 1:
         l1.sortList(False)
         l_Products=l1.convertToArr()
         products=l_Products
-        #products = products.order_by('-created')
+    #วันที่ เก่า-ใหม่
     elif int(s_id) == 2:
         l1.sortList(True)
         l_Products=l1.convertToArr()
         products=l_Products
-        #products = products.order_by('created')
+    #ราคา น้อย-มาก
     elif int(s_id) == 3:
-        products = sort_by_price(q2_Products,True)
-        #products = products.order_by('price')
+        products = sort_by_price(qPrice_Products,True)
+    #ราคา มาก-น้อย 
     elif int(s_id) == 4:
-        products = sort_by_price(q2_Products,False)
-        #products = products.order_by('-price')
+        products = sort_by_price(qPrice_Products,False)
+        
 
     if c:
         temp = []
@@ -256,3 +255,6 @@ def signup_view(request):
 
 def aboutus(request):
     return render(request,'store/aboutus.html')
+
+def manual(request):
+    return render(request,'store/manual.html')

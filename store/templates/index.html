@@ -73,10 +73,12 @@ style="width: 100%; height:50%; margin:auto; margin-top:10px">
 
 
   <!-- สินค้าแนะนำ -->
-  <hr style="height:5px;border:none;color:#333;background-color:#333;" />
-  <div class="head_text">สินค้าแนะนำ</div>
+  
+  <div class="box-elementcin">
+  <div class="head_text" data-shadow="สินค้าแนะนำ">สินค้าแนะนำ</div>
+  </div>
   <!-- head_text -->
-  <hr style="height:5px;border:none;color:#333;background-color:#333;" />
+  <hr style="height:3px;border:none;color:#333;background-color:#333;" />
 
   <!-- ลูปแสดงสินค้า -->
 
@@ -84,22 +86,22 @@ style="width: 100%; height:50%; margin:auto; margin-top:10px">
   <div class='row mb-2' style='padding-left: 20px;'>
     <!-- สินค้าแนะนำทั้งหมด -->
     {% for r in reccom %}
-    <div class='col-lg-3 mt-2 mb-2'>
+    <div class='col-lg-20 mt-2 mb-2'>
       <a href="{% url 'myapp:detail' slug=r.product.slug %}"><img class='thumbnail' src="{{r.product.image.url}}"></a>
       <div class='box-element product'>
         <a href="{% url 'myapp:detail' slug=r.product.slug %}" style="text-decoration: none;"><h6><strong>{{r.product.name}}</strong></h6></a>
         <hr>
         <a href="{% url 'myapp:cart_add' slug=r.product.slug %}" class='btn btn-outline-secondary add-btn'>Add to Cart</a>
-        <a class="btn btn-outline-success" href="{% url 'myapp:detail' slug=r.product.slug %}">View Detail</a>
+        <a class="btn btn-outline-success" href="{% url 'myapp:detail' slug=r.product.slug %}">Detail</a>
         <h4 style="display: inline-block'; float:right"><strong>฿{{r.product.price}}</strong></h4>
       </div>
     </div>
     {% endfor %}
   </div>
+  <hr style="height:5px;border:none;color:#333;background-color:#333;" />
   <div class="text-center">
     <a href="{% url 'myapp:store' %}"><button type="button" class="btn btn-success m-auto" id="more">สินค้าทั้งหมด</button></a>
   </div>
-  <hr style="height:5px;border:none;color:#333;background-color:#333;" />
 
 
 </div>

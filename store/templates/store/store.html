@@ -3,9 +3,11 @@
 {% block title %}สินค้าทั้งหมด{% endblock %}
 {% block content %}
 <div class="container">
+  <div class="box-elementcin2">
     <div class="text-center m-3">
-        <h1>สินค้าทั้งหมด</h1>
+        <h2>สินค้าทั้งหมด</h2>
     </div>
+  </div>
     <hr style="height:5px;border:none;color:#333;background-color:#333;" />
     <div class='row'>
 
@@ -59,7 +61,7 @@
                 <a href="{% url 'myapp:detail' slug=p.slug %}" style="text-decoration: none;"><h6><strong>{{p.name}}</strong></h6></a>
                 <hr>
                 <a class='btn btn-outline-secondary add-btn' href="{% url 'myapp:cart_add' slug=p.slug%}">Add to Cart</a>
-                <a class="btn btn-outline-success" href="{% url 'myapp:detail' slug=p.slug %}">View Detail</a>
+                <a class="btn btn-outline-success" href="{% url 'myapp:detail' slug=p.slug %}">Detail</a>
                 <h4 style="display: inline-block'; float:right"><strong>฿{{p.price}}</strong></h4>
               </div>
             </div>
